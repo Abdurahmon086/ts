@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "1230",
+    "database": "authdb",
+    "host": "5432",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "1230",
+    "database": "authdb_test",
+    "host": "5432",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "postgres",
+    "password": "1230",
+    "database": "authdb_prod",
+    "host": "5432",
+    "dialect": "postgres"
+  }
+}
