@@ -4,20 +4,7 @@
     "password": "1230",
     "database": "authdb",
     "host": "db",
-    "dialect": "postgres"
-  },
-  "test": {
-    "username": "postgres",
-    "password": "1230",
-    "database": "authdb_test",
-    "host": "db",
-    "dialect": "postgres"
-  },
-  "production": {
-    "username": "postgres",
-    "password": "1230",
-    "database": "authdb_prod",
-    "host": "db",
+    "port": 5432,
     "dialect": "postgres"
   }
 }

@@ -1,7 +1,7 @@
-version: "3.8"
 services:
   db:
     image: postgres:15-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1230
@@ -10,15 +10,29 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
   backend:
     build: .
+    depends_on:
+      - db
     environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/authdb
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: 1230
+      DB_NAME: authdb
+      NODE_ENV: development
+      DATABASE_URL: postgres://postgres:1230@db:5432/authdb
       JWT_SECRET: supersecretkey
     ports:
       - "3300:3300"
-    depends_on:
-      - db
-    command: npm run dev
+    # DB tayyor bo‘lmaguncha kut → migratsiya → server
+    command: >
+      sh -c "
+      npx wait-port -t 5000 db:5432 &&
+      npx sequelize db:migrate &&
+      npm run dev
+      "
+
 volumes:
   pgdata:
